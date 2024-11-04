@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/Jaanu2429/Blue-Green-Deployment.git'
+                git branch: 'master', credentialsId: 'git-cred', url: 'https://github.com/Jaanu2429/Blue-Green-Deployment.git'
             }
         }
         stage('Maven Build') {
