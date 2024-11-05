@@ -28,7 +28,7 @@ spec:
           value: Test@123
         resources:
           requests:
-            memory: "500Mi"
+            memory: "550Mi"
             cpu: "500m"
           limits:
             memory: "1000Mi"
