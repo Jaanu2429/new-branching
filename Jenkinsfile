@@ -32,8 +32,8 @@ pipeline {
                         string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
                     ]) {
                         sh '''
-                            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-                            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+                            aws configure set AWS_ACCESS_KEY_ID $AWS_ACCESS_KEY_ID
+                            aws configure set AWS_SECRET_ACCESS_KEY $AWS_SECRET_ACCESS_KEY
                             aws configure set default.region us-east-1
                             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 463470944171.dkr.ecr.us-east-1.amazonaws.com/ecrrepo1
                         '''
