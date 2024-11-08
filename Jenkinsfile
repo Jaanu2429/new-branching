@@ -5,9 +5,8 @@ pipeline {
         choice(name: 'DOCKER_TAG', choices: ['blue', 'green'], description: 'Choose the Docker image tag for the deployment')
     }
     environment {
-        IMAGE_NAME = "911167902479.dkr.ecr.us-east-1.amazonaws.com/bankapp"
+        IMAGE_NAME = "463470944171.dkr.ecr.us-east-1.amazonaws.com/ecrrepo1"
         TAG = "${params.DOCKER_TAG}"
-        SCANNER_HOME = tool 'sonar-scanner'
         JAVA_HOME = tool name: 'java-17'
         MAVEN_HOME = tool 'maven3'
     }
@@ -24,13 +23,7 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar') {
-                    sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=nodejsmysql -Dsonar.projectName=nodejsmysql -Dsonar.java.binaries=target/classes"
-                }
-            }
-        }
+        
         stage('Login to Amazon ECR') {
             steps {
                 script {
@@ -42,7 +35,7 @@ pipeline {
                             aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
                             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
                             aws configure set default.region us-east-1
-                            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 911167902479.dkr.ecr.us-east-1.amazonaws.com/bankapp
+                            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 463470944171.dkr.ecr.us-east-1.amazonaws.com/ecrrepo1
                         '''
                     }
                 }
